@@ -28,7 +28,7 @@ export class ContaPage {
     //this.getConta()
     this.afAuth.authState.subscribe(usr => {
       this.usuario = usr;
-      this.contaFirebase = this.af.object('/contas/' + usr.uid)
+      ///this.contaFirebase = this.af.object('/contas/ID')
     });
   }
 

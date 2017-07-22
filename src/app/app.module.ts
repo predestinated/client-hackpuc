@@ -13,15 +13,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { ContaProvider } from '../providers/conta/conta';
 import { HttpModule } from "@angular/http";
 
-const config = {
-  apiKey: "",
-  authDomain: "",
-  databaseURL: "",
-  projectId: "",
-  storageBucket: "",
-  messagingSenderId: ""
-};
-
 @NgModule({
   declarations: [
     MyApp,
@@ -33,8 +24,7 @@ const config = {
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(MyApp),
-    AngularFireModule.initializeApp(config)
-
+    AngularFireModule.initializeApp(environment.firebase)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
