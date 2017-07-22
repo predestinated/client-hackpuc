@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, Platform, ViewController } from 'ionic-angular';
+import { NavController, NavParams, Platform, ViewController, IonicPage } from 'ionic-angular';
 
 /**
  * Generated class for the CardModalPage page.
@@ -8,6 +8,7 @@ import { NavController, NavParams, Platform, ViewController } from 'ionic-angula
  * on Ionic pages and navigation.
  */
 
+@IonicPage()
 @Component({
   selector: 'page-card-modal',
   templateUrl: 'card-modal.html',

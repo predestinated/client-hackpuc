@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import {CardModalPage} from '../card-modal/card-modal'
 import { NavController, NavParams,IonicPage, ModalController, ViewController, Platform } from 'ionic-angular';
 /**
  * Generated class for the ProfilePage page.
@@ -25,7 +24,7 @@ export class ProfilePage {
   }
 
   openModal() {
-    let modal = this.modalCtrl.create(CardModalPage);
+    let modal = this.modalCtrl.create('CardModalPage');
     modal.present();
   }
 
