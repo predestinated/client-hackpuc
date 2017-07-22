@@ -1,9 +1,9 @@
-import { CardModalPage } from './card-modal';
+import { ItemModalPage } from './item-modal';
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 
 @NgModule({
-  declarations: [CardModalPage],
-  imports: [IonicPageModule.forChild(CardModalPage)],
+    declarations: [ItemModalPage],
+    imports: [IonicPageModule.forChild(ItemModalPage)],
 })
 export class CardModalModule { }

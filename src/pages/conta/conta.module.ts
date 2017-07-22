@@ -6,4 +6,4 @@ import { IonicPageModule } from 'ionic-angular';
   declarations: [ContaPage],
   imports: [IonicPageModule.forChild(ContaPage)],
 })
-export class HomePageModule { }
+export class ContaPageModule { }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, IonicPage } from 'ionic-angular';
+import { NavController, NavParams, IonicPage, ModalController } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -14,10 +14,16 @@ export class CatalogoPage {
       'showItens': false,
       'produtos': [
         {
-          'nome': 'Suco'
+          'nome': 'Suco',
+          'preco': '3,50',
+          'id': 1,
+          'categoria': 1
         },
         {
-          'nome': 'Pão'
+          'nome': 'Pão',
+          'preco': '2,50',
+          'id': 2,
+          'categoria': 1
         }
       ]
     },
@@ -30,10 +36,16 @@ export class CatalogoPage {
       'showItens': false,
       'produtos': [
         {
-          'nome': 'Vinho'
+          'nome': 'Vinho',
+          'preco': '35,00',
+          'id': 1,
+          'categoria': 1
         },
         {
-          'nome': 'Café'
+          'nome': 'Café',
+          'preco': '2,90',
+          'id': 1,
+          'categoria': 1
         }
       ]
     },
@@ -43,7 +55,7 @@ export class CatalogoPage {
     }]
   showItens: boolean = false
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController) {
     console.log(this.categorias)
   }
 
@@ -66,13 +78,12 @@ export class CatalogoPage {
       categoria.showImagem = true;
     }
     console.log(categoria)
-    //cat.showItens = cat.showItens? false: true
-    //console.log(cat)
   }
 
-  openProducts(event) {
-    console.log(event);
-
+  openProduct(prod) {
+    console.log('prod', prod)
+    let modal = this.modalCtrl.create('ItemModalPage', {'produto': prod});
+    modal.present();
   }
 
 }

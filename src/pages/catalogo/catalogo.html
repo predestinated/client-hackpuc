@@ -6,17 +6,23 @@
 -->
 <ion-header>
   <ion-navbar>
-    <ion-title>catalogo</ion-title>
+    <ion-title>{{ catalogo?.estabelecimento }}</ion-title>
   </ion-navbar>
 </ion-header>
 
 
 <ion-content padding>
+  <ion-navbar>
+    <ion-title text-center>Catalogo</ion-title>
+  </ion-navbar>
+
   <ion-row *ngFor="let categoria of categorias; let i = index">
-    <ion-item (click)="toggleDetalhes(categoria)" *ngIf="categoria.produtos">
-      <h1>{{categoria.nome}}</h1>
+    <ion-item *ngIf="categoria.produtos">
+      <div (click)="toggleDetalhes(categoria)">
+        <h1>{{categoria.nome}}</h1>
+      </div>
       <ion-list [hidden]="!categoria.showImagem">
-        <ion-item *ngFor="let produto of categoria.produtos">
+        <ion-item *ngFor="let produto of categoria.produtos" (click)="openProduct(produto)">
           {{produto?.nome}}
         </ion-item>
       </ion-list>
