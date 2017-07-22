@@ -1,0 +1,26 @@
+page-sign-in {
+    .divider {
+        color: #c0c0c0;
+        text-align: center;
+        &::after {
+            content: '';
+            background-color: #c0c0c0;
+            display: block;
+            height: 1px;
+            left: 5px;
+            position: absolute;
+            top: 43.5%;
+            width: 45%;
+        }
+        &::before {
+            content: '';
+            background-color: #c0c0c0;
+            display: block;
+            height: 1px;
+            right: 5px;
+            position: absolute;
+            top: 43.5%;
+            width: 45%;
+        }
+    }
+}
