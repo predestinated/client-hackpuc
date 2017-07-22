@@ -13,11 +13,12 @@ export class CatalogoPage {
       'nome': 'Entradas',
       'showItens': false,
       'produtos': [
-        {
-          'nome': 'Suco'
+        { 'nome': 'Suco',
+          'preco': '2'
         },
         {
-          'nome': 'Pão'
+          'nome': 'Pão',
+          'preco': '5,00'
         }
       ]
     },
@@ -30,10 +31,15 @@ export class CatalogoPage {
       'showItens': false,
       'produtos': [
         {
-          'nome': 'Vinho'
+          'nome': 'Vinho',
+          'preco': '52,00'
         },
         {
-          'nome': 'Café'
+          'nome': 'Café',
+          'preco': '5,90'
+        },
+        { 'nome': 'Suco',
+          'preco': '2,00'
         }
       ]
     },
@@ -72,7 +78,10 @@ export class CatalogoPage {
 
   openProducts(event) {
     console.log(event);
+  }
 
+  abrirModal(produto) {
+    console.log(produto)
   }
 
 }

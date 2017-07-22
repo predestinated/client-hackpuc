@@ -16,8 +16,8 @@
     <ion-item (click)="toggleDetalhes(categoria)" *ngIf="categoria.produtos">
       <h1>{{categoria.nome}}</h1>
       <ion-list [hidden]="!categoria.showImagem">
-        <ion-item *ngFor="let produto of categoria.produtos">
-          {{produto?.nome}}
+        <ion-item *ngFor="let produto of categoria.produtos" (click)="abrirModal(produto)">
+          {{produto?.nome}} - R$ {{ produto?.preco }}
         </ion-item>
       </ion-list>
     </ion-item>
