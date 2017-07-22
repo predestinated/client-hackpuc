@@ -10,12 +10,12 @@
   </ion-navbar>
 
   <ion-row *ngFor="let categoria of categorias; let i = index">
-    <ion-item *ngIf="categoria.produtos">
+    <ion-item *ngIf="produtos | async">
       <div (click)="toggleDetalhes(categoria)">
-        <h1>{{categoria.nome}}</h1>
+        <h1>{{categoria.type}}</h1>
       </div>
       <ion-list [hidden]="!categoria.showImagem">
-        <ion-item *ngFor="let produto of categoria.produtos" (click)="openProduct(produto)">
+        <ion-item *ngFor="let produto of categoria.data" (click)="openProduct(produto)">
           {{produto?.nome}}
         </ion-item>
       </ion-list>

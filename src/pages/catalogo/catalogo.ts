@@ -7,60 +7,15 @@ import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/databa
   selector: 'page-catalogo',
   templateUrl: 'catalogo.html'
 })
-export class CatalogoPage {
-  items: FirebaseListObservable<any[]>;
 
-  categorias: any = [
-    {
-      'nome': 'Entradas',
-      'showItens': false,
-      'produtos': [
-        {
-          'nome': 'Suco',
-          'preco': '3,50',
-          'id': 1,
-          'categoria': 1
-        },
-        {
-          'nome': 'Pão',
-          'preco': '2,50',
-          'id': 2,
-          'categoria': 1
-        }
-      ]
-    },
-    {
-      'nome': 'Pratos Principais',
-      'showItens': false,
-    },
-    {
-      'nome': 'Bebidas',
-      'showItens': false,
-      'produtos': [
-        {
-          'nome': 'Vinho',
-          'preco': '35,00',
-          'id': 1,
-          'categoria': 1
-        },
-        {
-          'nome': 'Café',
-          'preco': '2,90',
-          'id': 1,
-          'categoria': 1
-        }
-      ]
-    },
-    {
-      'nome': 'Sobremesas',
-      'showItens': false
-    }]
-  showItens: boolean = false
+export class CatalogoPage {
   produtos: FirebaseListObservable<any[]>
+  showItens: boolean = false
+  categorias: any[]
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public modalCtrl: ModalController, private db: AngularFireDatabase) {
-    console.log(this.categorias)
+
   }
 
   ionViewDidLoad() {
@@ -82,23 +37,9 @@ export class CatalogoPage {
         types[cur.categoria].data.push(cur);
       }
       this.categorias = newArr;
-      //this.categorias[0] = produto.filter(el => {
-      //  el.categoria == "Entrada" ? el : null
-      //})
-      //this.categorias[1] = produto.filter(el => {
-      //  el.categoria == "Prato Principal" ? el : null
-      //})
-      //this.categorias[2] = produto.filter(el => {
-      // el.categoria == "Bebidas"
-      //})
-      //this.categorias[3] = produto.filter(el => {
-      //  el.categoria == "Sobremesa" ? el : null
-      //})
-
-      console.log(this.categorias)
-    })
+      console.log('Categorias', this.categorias);
+    });
   }
-
 
   toggleDetalhes(data) {
     if (data.showImagem) {
