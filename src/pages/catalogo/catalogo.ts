@@ -58,7 +58,7 @@ export class CatalogoPage {
   showItens: boolean = false
   produtos: FirebaseListObservable<any[]>
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, 
+  constructor(public navCtrl: NavController, public navParams: NavParams,
     public modalCtrl: ModalController, private db: AngularFireDatabase) {
     console.log(this.categorias)
   }
@@ -66,10 +66,39 @@ export class CatalogoPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad CatalogoPage');
     this.produtos = this.db.list('produtos');
-    this.produtos.subscribe(produtos =>
-      console.log(produtos)
-    )
+    this.produtos.subscribe(produto => {
+
+      let newArr = []
+      let types = {}
+      let newItem
+      let cur
+      let j
+      for (let i = 0, j = produto.length; i < j; i++) {
+        cur = produto[i];
+        if (!(cur.categoria in types)) {
+          types[cur.categoria] = { type: cur.categoria, data: [] };
+          newArr.push(types[cur.categoria]);
+        }
+        types[cur.categoria].data.push(cur);
+      }
+      this.categorias = newArr;
+      //this.categorias[0] = produto.filter(el => {
+      //  el.categoria == "Entrada" ? el : null
+      //})
+      //this.categorias[1] = produto.filter(el => {
+      //  el.categoria == "Prato Principal" ? el : null
+      //})
+      //this.categorias[2] = produto.filter(el => {
+      // el.categoria == "Bebidas"
+      //})
+      //this.categorias[3] = produto.filter(el => {
+      //  el.categoria == "Sobremesa" ? el : null
+      //})
+
+      console.log(this.categorias)
+    })
   }
+
 
   toggleDetalhes(data) {
     if (data.showImagem) {
@@ -90,7 +119,7 @@ export class CatalogoPage {
 
   openProduct(prod) {
     console.log('prod', prod)
-    let modal = this.modalCtrl.create('ItemModalPage', {'produto': prod});
+    let modal = this.modalCtrl.create('ItemModalPage', { 'produto': prod });
     modal.present();
   }
 

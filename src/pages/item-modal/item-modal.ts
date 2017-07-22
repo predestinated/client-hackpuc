@@ -17,7 +17,7 @@ export class ItemModalPage {
 
   produto;
   valorTotal;
-  counter;
+  counter = 1
 
   constructor(
     public navCtrl: NavController,
@@ -32,6 +32,19 @@ export class ItemModalPage {
 
   dismiss() {
     this.viewCtrl.dismiss()
+  }
+
+  addQuantity() {
+    this.counter++
+  }
+
+  removeQuantity() {
+    if(this.counter > 1) {
+      this.counter--
+    }
+    else {
+      return false;
+    }
   }
 
 }
