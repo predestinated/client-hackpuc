@@ -13,8 +13,10 @@
 
 <ion-content padding>
   <ion-row *ngFor="let categoria of categorias; let i = index">
-    <ion-item (click)="toggleDetalhes(categoria)" *ngIf="categoria.produtos">
-      <h1>{{categoria.nome}}</h1>
+    <ion-item *ngIf="categoria.produtos">
+      <div (click)="toggleDetalhes(categoria)">
+        <h1>{{categoria.nome}}</h1>
+      </div>
       <ion-list [hidden]="!categoria.showImagem">
         <ion-item *ngFor="let produto of categoria.produtos" (click)="abrirModal(produto)">
           {{produto?.nome}} - R$ {{ produto?.preco }}

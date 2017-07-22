@@ -11,9 +11,12 @@ export class CatalogoPage {
   categorias: any = [
     {
       'nome': 'Entradas',
+      'id': 1,
       'showItens': false,
       'produtos': [
-        { 'nome': 'Suco',
+        { 'id': 1,
+          'tipo': 1,
+          'nome': 'Suco',
           'preco': '2'
         },
         {
