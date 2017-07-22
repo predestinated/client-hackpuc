@@ -12,7 +12,7 @@ export class TabsPage {
 
   constructor() {
     if (this.isLoggedIn) {
-      this.tab3Root = 'ProfilePage'
+      this.tab3Root = 'SignInPage'
     } else {
       this.tab3Root = 'SignInPage'
     }

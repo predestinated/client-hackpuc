@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { SignUpPage } from '../sign-up/sign-up'
 import { NavController, NavParams, IonicPage } from 'ionic-angular';
+import { Observable } from 'rxjs/Observable';
+import { AngularFireAuth } from 'angularfire2/auth';
+import * as firebase from 'firebase/app';
 
 /**
  * Generated class for the SignInPage page.
@@ -15,12 +18,15 @@ import { NavController, NavParams, IonicPage } from 'ionic-angular';
 })
 export class SignInPage {
 
+  user: Observable<firebase.User>;
+
   credentials = {
     email: '',
     password: ''
   }
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public afAuth: AngularFireAuth) {
+    this.user = afAuth.authState;
   }
 
   sendSignInForm () {
@@ -29,6 +35,14 @@ export class SignInPage {
 
   goTo (page) {
     this.navCtrl.push(page)
+  }
+
+  login() {
+    this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+  }
+
+  logout() {
+    this.afAuth.auth.signOut();
   }
 
 }
