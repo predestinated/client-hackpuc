@@ -4,6 +4,8 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { environment } from '../environments/environment';
 import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import { AboutPage } from '../pages/about/about';
 import { HomePage } from '../pages/home/home';
@@ -25,7 +27,9 @@ import { AuthenticationProvider } from '../providers/authentication/authenticati
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(MyApp),
-    AngularFireModule.initializeApp(environment.firebase)
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -38,6 +42,9 @@ import { AuthenticationProvider } from '../providers/authentication/authenticati
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ContaProvider,
+    AngularFireModule,
+    AngularFireAuthModule,
+    AngularFireDatabaseModule,
     AuthenticationProvider
   ]
 })

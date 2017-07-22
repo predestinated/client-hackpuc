@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, IonicPage, ModalController } from 'ionic-angular';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
 @IonicPage()
 @Component({
   selector: 'page-catalogo',
-  templateUrl: 'catalogo.html',
+  templateUrl: 'catalogo.html'
 })
 export class CatalogoPage {
+  items: FirebaseListObservable<any[]>;
 
   categorias: any = [
     {
@@ -54,13 +56,16 @@ export class CatalogoPage {
       'showItens': false
     }]
   showItens: boolean = false
+  produtos: FirebaseListObservable<any[]>
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, 
+    public modalCtrl: ModalController, private db: AngularFireDatabase) {
     console.log(this.categorias)
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CatalogoPage');
+    this.produtos = this.db.list('produtos');
   }
 
   toggleDetalhes(data) {
