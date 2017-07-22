@@ -2,6 +2,8 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
+import { environment } from '../environments/environment';
+import { AngularFireModule } from 'angularfire2';
 
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
@@ -12,8 +14,6 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { ContaProvider } from '../providers/conta/conta';
 import { HttpModule } from "@angular/http";
-
-import { AngularFireModule } from 'angularfire2';
 
 const config = {
   apiKey: "",
@@ -37,6 +37,7 @@ const config = {
     HttpModule,
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(config)
+
   ],
   bootstrap: [IonicApp],
   entryComponents: [
