@@ -1,0 +1,25 @@
+{
+    "estabelecimento": "Bar do Zeca",
+    "produtos": [
+        {
+            "nome": "Cerveja",
+            "qtd": 2,
+            "precoUnitario": 7.20
+        },
+        {
+            "nome": "Biscoito",
+            "qtd": 4,
+            "precoUnitario": 3
+        },
+        {
+            "nome": "Coxinha",
+            "qtd": 1,
+            "precoUnitario": 2.5
+        },
+        {
+            "nome": "Vinho",
+            "qtd": 1,
+            "precoUnitario": 120
+        }
+    ]
+}

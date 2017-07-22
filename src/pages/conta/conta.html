@@ -7,12 +7,32 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>conta</ion-title>
+    <ion-title text-center>{{conta?.estabelecimento}}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+  <ion-navbar>
+    <ion-title text-center>Conta</ion-title>
+  </ion-navbar>
+
+  <ion-list>
+    <ion-row *ngFor="let produto of conta?.produtos">
+      <ion-col col-8>
+        <h3>{{produto.nome}}</h3>
+      </ion-col>
+      <ion-col>
+        <h3 class="preco">R${{produto.precoUnitario * produto.qtd}}</h3>
+      </ion-col>
+    </ion-row>
+  </ion-list>
+
+  <ion-footer>
+    <ion-item>
+      <h1 class="total">Total: R$123</h1>
+    </ion-item>
+  </ion-footer>
 
 </ion-content>
