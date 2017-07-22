@@ -8,20 +8,40 @@ import { NavController, NavParams, IonicPage } from 'ionic-angular';
 })
 export class CatalogoPage {
 
-  categorias = [
-      {'nome': 'Entradas',
-        'showItens': false
-      },
-      {'nome': 'Pratos Principais',
-        'showItens': false,
-      },
-      {'nome': 'Bebidas',
-        'showItens': false
-      },
-      {'nome':'Sobremesas',
-        'showItens': false
-      }]
-  showItens:boolean = false
+  categorias: any = [
+    {
+      'nome': 'Entradas',
+      'showItens': false,
+      'produtos': [
+        {
+          'nome': 'Suco'
+        },
+        {
+          'nome': 'Pão'
+        }
+      ]
+    },
+    {
+      'nome': 'Pratos Principais',
+      'showItens': false,
+    },
+    {
+      'nome': 'Bebidas',
+      'showItens': false,
+      'produtos': [
+        {
+          'nome': 'Vinho'
+        },
+        {
+          'nome': 'Café'
+        }
+      ]
+    },
+    {
+      'nome': 'Sobremesas',
+      'showItens': false
+    }]
+  showItens: boolean = false
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     console.log(this.categorias)
@@ -29,6 +49,14 @@ export class CatalogoPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CatalogoPage');
+  }
+
+  toggleDetalhes(data) {
+    if (data.showImagem) {
+      data.showImagem = false;
+    } else {
+      data.showImagem = true;
+    }
   }
 
   abrirProdutos(categoria) {
@@ -42,9 +70,9 @@ export class CatalogoPage {
     //console.log(cat)
   }
 
-  openProducts (event) {
+  openProducts(event) {
     console.log(event);
-    
+
   }
 
 }
