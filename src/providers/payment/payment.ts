@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers } from '@angular/http';
+import { Http } from '@angular/http';
 import {environment} from '../../environments/environment';
 import 'rxjs/add/operator/map';
 
@@ -35,20 +35,11 @@ interface SimplePayment {
 @Injectable()
 export class PaymentProvider {
 
-  constructor(public http: Http) {
-    console.log('Hello PaymentProvider Provider');
-  }
+  constructor(public http: Http) {}
 
   pay (payment: SimplePayment) {
-    let url = environment.cielo.RequestAPI + '1/sales/'
-    let headers = new Headers();
-    headers.append('MerchantId', environment.cielo.MerchantId);
-    headers.append('MerchantKey', environment.cielo.MerchantKey);
-    return this
-    .http
-    .post(url,payment,{
-      headers: headers
-    })
+    return this.http
+    .post(`${environment.payment.url}/pay`,payment)
     .subscribe(data => console.log(data));
   }
 

@@ -52,7 +52,7 @@ export class ContaPage {
       },
       "Payment":{
         "Type":"CreditCard",
-        "Amount":100,
+        "Amount":100000,
         "Installments":1,
         "SoftDescriptor":"123456789ABCD",
         "CreditCard":{
