@@ -1,3 +1,15 @@
 page-profile {
-
+    .profile__photo>img {
+        border-radius: 50%;
+        display: block;
+        height: 80px;
+        margin: 1em auto;
+        width: 80px;
+    }
+    .cards__item {
+        display: inline-block;
+    }
+    .cards__dropdown {
+        display: block;
+    }
 }

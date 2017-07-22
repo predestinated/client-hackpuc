@@ -8,6 +8,19 @@ import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { ContaProvider } from '../providers/conta/conta';
+import { HttpModule } from "@angular/http";
+
+import { AngularFireModule } from 'angularfire2';
+
+const config = {
+  apiKey: "",
+  authDomain: "",
+  databaseURL: "",
+  projectId: "",
+  storageBucket: "",
+  messagingSenderId: ""
+};
 
 @NgModule({
   declarations: [
@@ -18,7 +31,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    HttpModule,
+    IonicModule.forRoot(MyApp),
+    AngularFireModule.initializeApp(config)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -30,7 +45,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    ContaProvider
   ]
 })
 export class AppModule {}
