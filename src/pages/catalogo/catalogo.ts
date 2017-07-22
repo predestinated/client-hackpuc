@@ -66,6 +66,9 @@ export class CatalogoPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad CatalogoPage');
     this.produtos = this.db.list('produtos');
+    this.produtos.subscribe(produtos =>
+      console.log(produtos)
+    )
   }
 
   toggleDetalhes(data) {
