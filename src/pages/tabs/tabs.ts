@@ -9,7 +9,7 @@ import { ContactPage } from '../contact/contact';
 export class TabsPage {
 
   tab1Root = 'CatalogoPage';
-  tab2Root = AboutPage;
+  tab2Root = 'ContaPage';
   tab3Root = ContactPage;
 
   constructor() {
