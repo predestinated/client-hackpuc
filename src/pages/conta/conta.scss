@@ -1,8 +1,20 @@
 page-conta {
     .preco{
         float: right;
+        color: color($colors, secondary);
     }
     .total{
         float: right;
+    }
+    .toolbar-title-md {
+      font-size: 1.7em;
+    }
+    .fechamento {
+      width: 100%;
+      padding: 1.5em;
+      font-size: 1.2em;
+    }
+    .pedido {
+      font-size: 1.2em;
     }
 }
