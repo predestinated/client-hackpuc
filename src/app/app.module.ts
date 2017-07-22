@@ -2,7 +2,7 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
-
+import {CardModalPage} from '../pages/card-modal/card-modal'
 import { AboutPage } from '../pages/about/about';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
@@ -26,6 +26,7 @@ const config = {
   declarations: [
     MyApp,
     AboutPage,
+    CardModalPage,
     HomePage,
     TabsPage
   ],
@@ -39,6 +40,7 @@ const config = {
   entryComponents: [
     MyApp,
     AboutPage,
+    CardModalPage,
     HomePage,
     TabsPage
   ],

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams,IonicPage } from 'ionic-angular';
-
+import {CardModalPage} from '../card-modal/card-modal'
+import { NavController, NavParams,IonicPage, ModalController, ViewController, Platform } from 'ionic-angular';
 /**
  * Generated class for the ProfilePage page.
  *
@@ -21,11 +21,14 @@ export class ProfilePage {
     email: 'lucasktrindade@gmail.com'
   }
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ProfilePage');
+  openModal() {
+    let modal = this.modalCtrl.create(CardModalPage);
+    modal.present();
   }
 
 }
+
+
