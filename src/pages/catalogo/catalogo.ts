@@ -87,7 +87,7 @@ export class CatalogoPage {
   openOrder(){
     this.order.forEach(element => {
       element.entregue = false
-      this.conta.$ref.ref.child('produtos').push({element})
+      this.conta.$ref.ref.child('produtos').push(element)
     });
 
   }
