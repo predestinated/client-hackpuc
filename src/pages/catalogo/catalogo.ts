@@ -71,8 +71,8 @@ export class CatalogoPage {
 
   openProduct(prod) {
     console.log('prod', prod)
-    let modal = this.modalCtrl.create('ItemModalPage', { 
-      'produto': prod 
+    let modal = this.modalCtrl.create('ItemModalPage', {
+      'produto': prod
     });
     modal.onDidDismiss(data => {
       this.order = data;
@@ -82,14 +82,18 @@ export class CatalogoPage {
     modal.present();
   }
 
-  openOrder(){
-    this.order.forEach(element => {
-      element.entregue = false
-      this.conta.$ref.ref.child('produtos').push(element)
-    });
+  openOrder() {
+    if (this.order.length == 0) {
+      this.alertCtrl.create({ title: 'Opa...', subTitle: 'Você ainde não tem pedidos!' }).present()
+    } else {
+      this.order.forEach(element => {
+        element.entregue = false
+        this.conta.$ref.ref.child('produtos').push(element)
+      });
 
-    this.alertCtrl.create({title:'Sucesso', subTitle: 'Pedido efetuado!'}).present()
-    
+      this.alertCtrl.create({ title: 'Sucesso', subTitle: 'Pedido efetuado!' }).present()
+    }
+
   }
 
 }
