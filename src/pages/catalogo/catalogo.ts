@@ -91,7 +91,7 @@ export class CatalogoPage {
         element.entregue = false
         this.conta.$ref.ref.child('produtos').push(element)
       });
-
+      localStorage.setItem('order', JSON.stringify(this.order));
       this.alertCtrl.create({ title: 'Sucesso', subTitle: 'Pedido efetuado!' }).present()
     }
 
