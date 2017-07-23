@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, IonicPage, ModalController, LoadingController, AlertController } from 'ionic-angular';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import {ContaProvider} from '../../providers/conta/conta';
 
 @IonicPage({
   name: 'CatalogoPage',
@@ -15,13 +16,14 @@ export class CatalogoPage {
   categorias: any[]
   order = []
   showItens: boolean = false;
-  produtos: FirebaseListObservable<any[]>;
+  produtos= [];
   conta: FirebaseListObservable<any[]>;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public modalCtrl: ModalController, private db: AngularFireDatabase,
-    private loadingCtrl: LoadingController, private alertCtrl: AlertController) {
-    if (navParams.get('conta')) {
+    private loadingCtrl: LoadingController, private alertCtrl: AlertController, public contaProvider: ContaProvider) {
+      let paramConta = navParams.get('conta')
+    if (paramConta === '1' || paramConta === '2') {
       this.conta = this.db.list('contas/' + navParams.get('conta'), {
         query: {
           equalTo: navParams.get('conta')
@@ -32,6 +34,8 @@ export class CatalogoPage {
           this.conta.$ref.ref.update({ situacao: "aberta" })
         }
       })
+    } else {
+      // redireciona pra view de scanning
     }
 
   }
@@ -39,8 +43,11 @@ export class CatalogoPage {
   ionViewDidLoad() {
     let loading = this.loadingCtrl.create();
     loading.present()
-    this.produtos = this.db.list('produtos');
-    this.produtos.subscribe(produto => {
+
+    this.contaProvider.produtos.subscribe(produto => {
+      console.log(produto);
+      
+      this.produtos = produto
       let newArr = []
       let types = {}
       let cur
@@ -72,22 +79,21 @@ export class CatalogoPage {
       'produto': prod
     });
     modal.onDidDismiss(data => {
-      this.order = data;
-      console.log('veio da modal', data);
-      console.log('está no order', this.order);
-    });
+      this.order = this.order.concat(data)
+      console.log(this.order)
+    })
     modal.present();
   }
 
   openOrder() {
+    this.contaProvider.insertIntoConta(this.order)
     if (this.order.length == 0) {
       this.alertCtrl.create({ title: 'Opa...', subTitle: 'Você ainde não tem pedidos!' }).present()
     } else {
       this.order.forEach(element => {
-        element.entregue = false
-        this.conta.$ref.ref.child('produtos').push(element)
+        element.entregue = false;
       });
-      localStorage.setItem('order', JSON.stringify(this.order))
+       this.conta.$ref.ref.child('produtos').set(this.order)
       this.alertCtrl.create({ title: 'Sucesso', subTitle: 'Pedido efetuado!' }).present()
     }
 

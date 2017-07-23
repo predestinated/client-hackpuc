@@ -1,30 +1,30 @@
 <ion-header>
-  <ion-navbar color="primary">
-    <ion-title text-center>Bar do Zeca</ion-title>
-  </ion-navbar>
+    <ion-navbar color="primary">
+        <ion-title text-center>Bar do Zeca</ion-title>
+    </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <ion-navbar>
-    <ion-title text-center>Catálogo</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title text-center>Catálogo</ion-title>
+    </ion-navbar>
 
-  <ion-row *ngFor="let categoria of categorias; let i = index">
-    <ion-item *ngIf="produtos | async">
-      <div (click)="toggleDetalhes(categoria)">
-        <h1>{{categoria.type}}</h1>
-      </div>
-      <ion-list [hidden]="!categoria.showImagem">
-        <ion-item *ngFor="let produto of categoria.data" (click)="openProduct(produto)">
-          {{produto?.nome}}
+    <ion-row *ngFor="let categoria of categorias; let i = index">
+        <ion-item *ngIf="produtos">
+            <div (click)="toggleDetalhes(categoria)">
+                <h1>{{categoria.type}}</h1>
+            </div>
+            <ion-list [hidden]="!categoria.showImagem">
+                <ion-item *ngFor="let produto of categoria.data" (click)="openProduct(produto)">
+                    {{produto?.nome}}
+                </ion-item>
+            </ion-list>
         </ion-item>
-      </ion-list>
-    </ion-item>
-  </ion-row>
-
-  <ion-item>
-    <ion-row>
-        <button ion-button class="" (click)="openOrder()">Confirmar Pedido</button>
     </ion-row>
-  </ion-item>
+
+    <ion-item>
+        <ion-row>
+            <button ion-button class="" (click)="openOrder()">Confirmar Pedido</button>
+        </ion-row>
+    </ion-item>
 </ion-content>

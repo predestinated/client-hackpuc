@@ -47,7 +47,7 @@
           <ion-icon class="mais" name="add-circle"></ion-icon>
         </div>
       </ion-col>
-      <ion-col col-6 class="valor">R$ {{ (produto.preco * counter) }}</ion-col>
+      <ion-col col-6 class="valor">R$ {{ ((produto.preco / 100) * counter) }}</ion-col>
     </ion-row>
   </ion-grid>
   <ion-footer>

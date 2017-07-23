@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, IonicPage, Platform, ViewController } from 'ionic-angular';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import {ContaProvider} from '../../providers/conta/conta'
 
 /**
  * Generated class for the ItemModalPage page.
@@ -26,7 +27,8 @@ export class ItemModalPage {
     public platform: Platform,
     public viewCtrl: ViewController,
     public navParams: NavParams,
-    private db: AngularFireDatabase
+    private db: AngularFireDatabase,
+    public contaProvider: ContaProvider
     ) {
     console.log(navParams.get('produto'))
     this.produto = navParams.get('produto')
@@ -38,7 +40,6 @@ export class ItemModalPage {
 
   addQuantity(produto) {
     console.log("Adicionou: ",produto);
-    
     this.order.push(produto)
     this.counter++
   }
