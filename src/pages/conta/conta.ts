@@ -1,4 +1,3 @@
-import { ContaProvider } from './../../providers/conta/conta';
 import { Component } from '@angular/core';
 import { NavController, NavParams, IonicPage, LoadingController } from 'ionic-angular';
 
@@ -18,7 +17,7 @@ export class ContaPage {
   conta;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    private contaProvider: ContaProvider, private loadingCtrl: LoadingController,
+    private loadingCtrl: LoadingController,
     private afAuth: AngularFireAuth,
     private af: AngularFireDatabase) {
   }
@@ -35,26 +34,15 @@ export class ContaPage {
   getConta() {
     let loading = this.loadingCtrl.create();
     loading.present();
-    this.contaProvider.getConta().subscribe(conta => {
-      this.conta = conta
-      loading.dismiss();
-    })
+    // this.contaProvider.getConta().subscribe(conta => {
+    //   this.conta = conta
+    //   loading.dismiss();
+    // })
   }
 
   pagarConta(){
     console.log("Iniciou o fluxo de pagamento.");
     
-  }
-
-  autenticar() {
-    this.afAuth.auth.signInWithEmailAndPassword("allisonverdam@gmail.com", "allison123")
-      .then(res => {
-        this.usuario = res.user;
-      })
-  }
-
-  sair() {
-    this.afAuth.auth.signOut();
   }
 
 }

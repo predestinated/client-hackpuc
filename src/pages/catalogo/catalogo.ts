@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, IonicPage, ModalController, LoadingController } from 'ionic-angular';
+import { NavController, NavParams, IonicPage, ModalController, LoadingController, AlertController } from 'ionic-angular';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
 @IonicPage({
@@ -20,7 +20,7 @@ export class CatalogoPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public modalCtrl: ModalController, private db: AngularFireDatabase,
-    private loadingCtrl: LoadingController) {
+    private loadingCtrl: LoadingController, private alertCtrl: AlertController) {
     if (navParams.get('conta')) {
       this.conta = this.db.list('contas/' + navParams.get('conta'), {
         query: {
@@ -29,7 +29,7 @@ export class CatalogoPage {
       });
       this.conta.subscribe(conta => {
         if (conta.length === 0) {
-          this.conta.$ref.ref.update({ situacao: "aberta", precoTotal: 10, produtos: [] })
+          this.conta.$ref.ref.update({ situacao: "aberta" })
         }
       })
     }
@@ -69,15 +69,6 @@ export class CatalogoPage {
     }
   }
 
-  abrirProdutos(categoria) {
-    if (categoria.showImagem) {
-      categoria.showImagem = false;
-    } else {
-      categoria.showImagem = true;
-    }
-    console.log(categoria)
-  }
-
   openProduct(prod) {
     console.log('prod', prod)
     let modal = this.modalCtrl.create('ItemModalPage', { 
@@ -89,6 +80,16 @@ export class CatalogoPage {
       console.log('está no order', this.order);
     });
     modal.present();
+  }
+
+  openOrder(){
+    this.order.forEach(element => {
+      element.entregue = false
+      this.conta.$ref.ref.child('produtos').push(element)
+    });
+
+    this.alertCtrl.create({title:'Sucesso', subTitle: 'Pedido efetuado!'}).present()
+    
   }
 
 }
