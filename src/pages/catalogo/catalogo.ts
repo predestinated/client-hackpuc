@@ -43,7 +43,6 @@ export class CatalogoPage {
     this.produtos.subscribe(produto => {
       let newArr = []
       let types = {}
-      let newItem
       let cur
       let j
       for (let i = 0, j = produto.length; i < j; i++) {
@@ -80,12 +79,18 @@ export class CatalogoPage {
     modal.present();
   }
 
-  openOrder(){
-    this.order.forEach(element => {
-      element.entregue = false
-      this.conta.$ref.ref.child('produtos').push(element)
-    });
-    
+  openOrder() {
+    if (this.order.length == 0) {
+      this.alertCtrl.create({ title: 'Opa...', subTitle: 'Você ainde não tem pedidos!' }).present()
+    } else {
+      this.order.forEach(element => {
+        element.entregue = false
+        this.conta.$ref.ref.child('produtos').push(element)
+      });
+      localStorage.setItem('order', JSON.stringify(this.order))
+      this.alertCtrl.create({ title: 'Sucesso', subTitle: 'Pedido efetuado!' }).present()
+    }
+
   }
 
 }
