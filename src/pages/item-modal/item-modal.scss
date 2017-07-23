@@ -1,17 +1,34 @@
 page-item-modal {
 
+    .imagem-produto {
+      width: auto;
+      height: 200px;
+      margin: 0 auto;
+    }
+
+    .icon-container {
+      text-align: center;
+    }
+
+    .bar-header {
+      background-color: color($colors, primary);
+      color: #FFF;
+    }
+
     ion-icon {
-      font-size: 2em;
+      font-size: 1.6em;
     }
     ion-header {
       background-color: color($colors, primary)
     }
 
     .menos {
-      color: color($colors, danger)
+      color: color($colors, danger);
+      margin-top: 8px;
     }
     .mais {
-      color: color($colors, primary)
+      color: color($colors, primary);
+      margin-top: 8px;
     }
 
     .payment {
@@ -33,5 +50,6 @@ page-item-modal {
       text-align: right;
       color: color($colors, secondary);
       font-size: 1.5em;
+      margin-top: 5px;
     }
 }
