@@ -16,6 +16,7 @@ import { ContaProvider } from '../providers/conta/conta';
 import { HttpModule } from "@angular/http";
 import { AuthenticationProvider } from '../providers/authentication/authentication';
 import { UserProvider } from '../providers/user/user';
+import { PaymentProvider } from '../providers/payment/payment';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { UserProvider } from '../providers/user/user';
     AngularFireAuthModule,
     AngularFireDatabaseModule,
     AuthenticationProvider,
-    UserProvider
+    UserProvider,
+    PaymentProvider
   ]
 })
 export class AppModule {}

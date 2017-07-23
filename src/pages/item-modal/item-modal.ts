@@ -19,7 +19,7 @@ export class ItemModalPage {
   order = [];
   produto;
   valorTotal;
-  counter = 1
+  counter = 0
 
   constructor(
     public navCtrl: NavController,
@@ -30,28 +30,25 @@ export class ItemModalPage {
     ) {
     console.log(navParams.get('produto'))
     this.produto = navParams.get('produto')
-    //console.log(this.produto)
   }
 
   dismiss() {
     this.viewCtrl.dismiss(this.order)
   }
 
-  addQuantity() {
+  addQuantity(produto) {
+    this.order.push(produto)
     this.counter++
   }
 
-  removeQuantity() {
-    if(this.counter > 1) {
+  removeQuantity(produto) {
+    if(this.counter > 0) {
       this.counter--
+      this.order.pop()
     }
     else {
-      return false;
+      return false
     }
-  }
-
-  itemToOrder(produto) {
-    this.order.push(produto)
   }
 
 }

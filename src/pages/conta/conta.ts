@@ -1,4 +1,5 @@
 import { ContaProvider } from './../../providers/conta/conta';
+import {PaymentProvider} from '../../providers/payment/payment';
 import { Component } from '@angular/core';
 import { NavController, NavParams, IonicPage, LoadingController } from 'ionic-angular';
 
@@ -18,9 +19,11 @@ export class ContaPage {
   conta;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    private contaProvider: ContaProvider, private loadingCtrl: LoadingController,
+    private loadingCtrl: LoadingController,
     private afAuth: AngularFireAuth,
-    private af: AngularFireDatabase) {
+    private af: AngularFireDatabase,
+    private payment: PaymentProvider
+    ) {
   }
 
   ionViewDidLoad() {
@@ -35,26 +38,36 @@ export class ContaPage {
   getConta() {
     let loading = this.loadingCtrl.create();
     loading.present();
-    this.contaProvider.getConta().subscribe(conta => {
-      this.conta = conta
-      loading.dismiss();
-    })
+    // this.contaProvider.getConta().subscribe(conta => {
+    //   this.conta = conta
+    //   loading.dismiss();
+    // })
   }
 
   pagarConta(){
+    let payment = {
+      "MerchantOrderId":"2014111703",
+      "Customer":{
+          "Name":"Comprador crédito simples"
+      },
+      "Payment":{
+        "Type":"CreditCard",
+        "Amount":100000,
+        "Installments":1,
+        "SoftDescriptor":"123456789ABCD",
+        "CreditCard":{
+            "CardNumber":"0000.0000.0000.0001",
+            "Holder":"Teste Holder",
+            "ExpirationDate":"12/2030",
+            "SecurityCode":"123",
+            "SaveCard":"true",
+            "Brand":"Visa"
+        }
+      }
+    }
+    this.payment.pay(payment)
     console.log("Iniciou o fluxo de pagamento.");
     
-  }
-
-  autenticar() {
-    this.afAuth.auth.signInWithEmailAndPassword("allisonverdam@gmail.com", "allison123")
-      .then(res => {
-        this.usuario = res.user;
-      })
-  }
-
-  sair() {
-    this.afAuth.auth.signOut();
   }
 
 }

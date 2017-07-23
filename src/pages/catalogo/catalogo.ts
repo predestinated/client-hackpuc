@@ -1,29 +1,47 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, IonicPage, ModalController } from 'ionic-angular';
+import { NavController, NavParams, IonicPage, ModalController, LoadingController, AlertController } from 'ionic-angular';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
-@IonicPage()
+@IonicPage({
+  name: 'CatalogoPage',
+  segment: 'catalogo/:conta'
+})
 @Component({
   selector: 'page-catalogo',
   templateUrl: 'catalogo.html'
 })
 
 export class CatalogoPage {
-  produtos: FirebaseListObservable<any[]>
-  showItens: boolean = false
   categorias: any[]
   order = []
+  showItens: boolean = false;
+  produtos: FirebaseListObservable<any[]>;
+  conta: FirebaseListObservable<any[]>;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    public modalCtrl: ModalController, private db: AngularFireDatabase) {
+    public modalCtrl: ModalController, private db: AngularFireDatabase,
+    private loadingCtrl: LoadingController, private alertCtrl: AlertController) {
+    if (navParams.get('conta')) {
+      this.conta = this.db.list('contas/' + navParams.get('conta'), {
+        query: {
+          equalTo: navParams.get('conta')
+        }
+      });
+      this.conta.subscribe(conta => {
+        if (conta.length === 0) {
+          this.conta.$ref.ref.update({ situacao: "aberta" })
+        }
+      })
+    }
 
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CatalogoPage');
+    let loading = this.loadingCtrl.create();
+    loading.present()
     this.produtos = this.db.list('produtos');
     this.produtos.subscribe(produto => {
-
       let newArr = []
       let types = {}
       let newItem
@@ -38,6 +56,7 @@ export class CatalogoPage {
         types[cur.categoria].data.push(cur);
       }
       this.categorias = newArr;
+      loading.dismiss()
       console.log('Categorias', this.categorias);
     });
   }
@@ -50,24 +69,27 @@ export class CatalogoPage {
     }
   }
 
-  abrirProdutos(categoria) {
-    if (categoria.showImagem) {
-      categoria.showImagem = false;
-    } else {
-      categoria.showImagem = true;
-    }
-    console.log(categoria)
-  }
-
   openProduct(prod) {
     console.log('prod', prod)
-    let modal = this.modalCtrl.create('ItemModalPage', { 'produto': prod });
+    let modal = this.modalCtrl.create('ItemModalPage', { 
+      'produto': prod 
+    });
     modal.onDidDismiss(data => {
       this.order = data;
       console.log('veio da modal', data);
       console.log('está no order', this.order);
     });
     modal.present();
+  }
+
+  openOrder(){
+    this.order.forEach(element => {
+      element.entregue = false
+      this.conta.$ref.ref.child('produtos').push(element)
+    });
+
+    this.alertCtrl.create({title:'Sucesso', subTitle: 'Pedido efetuado!'}).present()
+    
   }
 
 }

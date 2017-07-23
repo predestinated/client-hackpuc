@@ -7,5 +7,8 @@ export const environment = {
     projectId: "paypper-4972c",
     storageBucket: "paypper-4972c.appspot.com",
     messagingSenderId: "806121451569"
+  },
+  payment: {
+    url:'https://api-hackpuc.herokuapp.com',
   }
 };

@@ -15,7 +15,7 @@ import {UserProvider} from '../../providers/user/user';
 })
 export class ProfilePage {
 
-  user: {}
+  user: any
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, public auth: AuthenticationProvider, public uss: UserProvider) {
     this.auth.user.subscribe(data => {
@@ -32,7 +32,11 @@ export class ProfilePage {
   }
 
   openModal() {
-    let modal = this.modalCtrl.create('CardModalPage');
+    let cards = []
+    if(this.user.hasOwnProperty('cards')) {
+     cards = this.user.cards 
+    }
+    let modal = this.modalCtrl.create('CardModalPage', {cards: cards});
     modal.present();
   }
 

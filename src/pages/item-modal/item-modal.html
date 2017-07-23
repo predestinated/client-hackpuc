@@ -15,7 +15,6 @@
   <ion-row>
     <img src="{{ produto?.url }}" *ngIf="produto.url" class="imagem-produto"/>
   </ion-row>
-
   <ion-grid>
     <ion-row>
       <ion-col col-12 text-center>
@@ -54,7 +53,7 @@
   <ion-footer>
     <ion-item>
       <ion-row>
-          <button ion-button color="primary" class="payment" (click)="itemToOrder()">Efetuar Pedido</button>
+          <button ion-button color="primary" class="payment" (click)="dismiss()">Adicionar</button>
       </ion-row>
     </ion-item>
   </ion-footer>
