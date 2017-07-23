@@ -1,7 +1,7 @@
 import { ContaProvider } from './../../providers/conta/conta';
 import {PaymentProvider} from '../../providers/payment/payment';
 import { Component } from '@angular/core';
-import { NavController, NavParams, IonicPage, LoadingController } from 'ionic-angular';
+import { NavController, NavParams, IonicPage, LoadingController, AlertController } from 'ionic-angular';
 
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2/database';
@@ -17,31 +17,51 @@ export class ContaPage {
   contaFirebase: FirebaseObjectObservable<any>;
   usuario: any;
   conta;
+  orders = [];
+  produtos = [];
+  total = 0;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private loadingCtrl: LoadingController,
     private afAuth: AngularFireAuth,
     private af: AngularFireDatabase,
-    private payment: PaymentProvider
+    private payment: PaymentProvider,
+    private alertCtrl: AlertController
     ) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ContaPage');
-    //this.getConta()
     this.afAuth.authState.subscribe(usr => {
       this.usuario = usr;
       ///this.contaFirebase = this.af.object('/contas/ID')
     });
+    this.orders = JSON.parse(localStorage.getItem('order')) || []
+    this.getConta()
+    
   }
 
   getConta() {
-    let loading = this.loadingCtrl.create();
-    loading.present();
+    console.log('getConta()');
+    
+    // let loading = this.loadingCtrl.create();
+    // loading.present();
     // this.contaProvider.getConta().subscribe(conta => {
     //   this.conta = conta
     //   loading.dismiss();
     // })
+
+    if (this.orders.length > 0) {
+      console.log('orders > 0');
+      
+      this.orders.forEach(element => {
+        this.produtos.push(element)
+        this.total += element.preco 
+      });
+
+      console.log('produtos', this.produtos)
+      console.log('total', this.total)
+    }
   }
 
   pagarConta(){

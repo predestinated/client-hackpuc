@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ViewController, IonicPage } from 'ionic-angular';
 import {AuthenticationProvider} from '../../providers/authentication/authentication'
+import {UserProvider} from '../../providers/user/user'
 
 /**
  * Generated class for the AddCardModalPage page.
@@ -24,11 +25,7 @@ export class AddCardModalPage {
     Type: ''
   }
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public authProvider: AuthenticationProvider) {
-    this.authProvider.user.subscribe(data => {
-      console.log(data);
-      
-    })
+  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public authProvider: AuthenticationProvider, public userProvider: UserProvider) {
   }
 
   dismiss() {

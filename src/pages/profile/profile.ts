@@ -17,15 +17,15 @@ export class ProfilePage {
 
   user: any
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, public auth: AuthenticationProvider, public uss: UserProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, public auth: AuthenticationProvider, public userProvider: UserProvider) {
     this.auth.user.subscribe(data => {
       if(data === null) {
         this.navCtrl.setRoot('SignInPage')
       }else {
-        this.uss.filterByName(data.uid)
+        this.userProvider.filterByUID(data.uid)
       }
     })
-    this.uss.users.subscribe(data => {      
+    this.userProvider.users.subscribe(data => {      
       this.user = data[0]
     })
 
