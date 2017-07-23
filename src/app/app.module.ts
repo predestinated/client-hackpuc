@@ -14,6 +14,8 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { ContaProvider } from '../providers/conta/conta';
 import { HttpModule } from "@angular/http";
+import { AuthenticationProvider } from '../providers/authentication/authentication';
+import { UserProvider } from '../providers/user/user';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,9 @@ import { HttpModule } from "@angular/http";
     ContaProvider,
     AngularFireModule,
     AngularFireAuthModule,
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    AuthenticationProvider,
+    UserProvider
   ]
 })
 export class AppModule {}

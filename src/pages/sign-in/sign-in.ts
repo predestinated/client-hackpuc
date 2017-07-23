@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { SignUpPage } from '../sign-up/sign-up'
 import { NavController, NavParams, IonicPage } from 'ionic-angular';
+import { AuthenticationProvider } from '../../providers/authentication/authentication'
 
 /**
  * Generated class for the SignInPage page.
@@ -20,11 +21,14 @@ export class SignInPage {
     password: ''
   }
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public auth: AuthenticationProvider) {
   }
 
   sendSignInForm () {
-    console.log(this.credentials);
+    this.auth.signInForm(this.credentials)
+    .then(success => {
+      this.navCtrl.setRoot('ProfilePage')
+    })
   }
 
   goTo (page) {

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {AuthenticationProvider} from '../../providers/authentication/authentication';
 
 @Component({
   templateUrl: 'tabs.html'
@@ -10,11 +11,13 @@ export class TabsPage {
   tab3Root = undefined;
   isLoggedIn = true
 
-  constructor() {
-    if (this.isLoggedIn) {
-      this.tab3Root = 'ProfilePage'
-    } else {
-      this.tab3Root = 'SignInPage'
-    }
+  constructor(public auth: AuthenticationProvider) {
+    this.auth.user.subscribe(data => {
+      if(data === null) {
+        this.tab3Root = 'SignInPage'
+      } else {
+        this.tab3Root = 'ProfilePage'
+      }
+    })
   }
 }
