@@ -22,6 +22,8 @@ export class CatalogoPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public modalCtrl: ModalController, private db: AngularFireDatabase,
     private loadingCtrl: LoadingController, private alertCtrl: AlertController, public contaProvider: ContaProvider) {
+      console.log("navParams.get('conta'):",navParams.get('conta'));
+      
       let paramConta = navParams.get('conta')
     if (paramConta === '1' || paramConta === '2') {
       this.conta = this.db.list('contas/' + navParams.get('conta'), {
@@ -36,6 +38,7 @@ export class CatalogoPage {
       })
     } else {
       // redireciona pra view de scanning
+      this.navCtrl.setRoot('TelaScannerPage')
     }
 
   }

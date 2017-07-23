@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, IonicPage } from 'ionic-angular';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 
 /**
@@ -9,9 +9,11 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
  * on Ionic pages and navigation.
  */
 
+@IonicPage()
 @Component({
   selector: 'page-tela-scanner',
   templateUrl: 'tela-scanner.html',
+  providers: [BarcodeScanner]
 })
 export class TelaScannerPage {
 
@@ -20,14 +22,14 @@ export class TelaScannerPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad TelaScannerPage');
+    this.scan();
   }
 
   scan() {
     this.barcodeScanner.scan().then((barcodeData) => {
       // Success! Barcode data is here
-      console.log("barcodeData:",barcodeData);
-      
+      console.log("barcodeData:", barcodeData);
+      this.navCtrl.setRoot('CatalogoPage', {conta: barcodeData.text.split("/").pop()});
     }, (err) => {
       // An error occurred
     });
