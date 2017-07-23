@@ -43,7 +43,7 @@ export class CatalogoPage {
       // redireciona pra view de scanning
       window.cordova
         ? this.navCtrl.setRoot('TelaScannerPage')
-        : this.navCtrl.setRoot('CatalogoPage', { conta: 1 })
+        : this.navCtrl.setRoot('CatalogoPage', { conta: "1" })
     }
 
   }
