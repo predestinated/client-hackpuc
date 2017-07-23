@@ -22,7 +22,7 @@
   </ion-row>
   <ion-row>
     <ion-col col-2 class="icon">
-      <ion-item (click)="removeQuantity()">
+      <ion-item (click)="removeQuantity(produto)">
         <ion-icon class="menos" name="remove-circle"></ion-icon>
       </ion-item>
     </ion-col>
@@ -30,7 +30,7 @@
     <ion-input text-center class="input-counter" [(ngModel)]="counter"></ion-input>
     </ion-col>
     <ion-col col-2 class="icon">
-      <ion-item (click)="addQuantity()">
+      <ion-item (click)="addQuantity(produto)">
         <ion-icon class="mais" name="add-circle"></ion-icon>
       </ion-item>
     </ion-col>
@@ -39,7 +39,7 @@
   <ion-footer>
     <ion-item>
       <ion-row>
-          <button ion-button color="primary" class="payment" (click)="itemToOrder()">Efetuar Pedido</button>
+          <button ion-button color="primary" class="payment" (click)="dismiss()">Efetuar Pedido</button>
       </ion-row>
     </ion-item>
   </ion-footer>
