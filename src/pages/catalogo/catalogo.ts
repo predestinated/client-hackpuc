@@ -28,8 +28,6 @@ export class CatalogoPage {
         }
       });
       this.conta.subscribe(conta => {
-        console.log("Contas: ", conta);
-        
         if (conta.length === 0) {
           this.conta.$ref.ref.update({ situacao: "aberta" })
         }
@@ -39,7 +37,6 @@ export class CatalogoPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad CatalogoPage');
     let loading = this.loadingCtrl.create();
     loading.present()
     this.produtos = this.db.list('produtos');
@@ -72,7 +69,6 @@ export class CatalogoPage {
   }
 
   openProduct(prod) {
-    console.log('prod', prod)
     let modal = this.modalCtrl.create('ItemModalPage', {
       'produto': prod
     });
@@ -89,7 +85,7 @@ export class CatalogoPage {
       element.entregue = false
       this.conta.$ref.ref.child('produtos').push(element)
     });
-
+    
   }
 
 }
