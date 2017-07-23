@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, IonicPage, ModalController } from 'ionic-angular';
+import { NavController, NavParams, IonicPage, ModalController, LoadingController } from 'ionic-angular';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
 @IonicPage()
@@ -15,15 +15,17 @@ export class CatalogoPage {
   order = []
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    public modalCtrl: ModalController, private db: AngularFireDatabase) {
+    public modalCtrl: ModalController, private db: AngularFireDatabase,
+    private loadingCtrl: LoadingController) {
 
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CatalogoPage');
+    let loading = this.loadingCtrl.create();
+    loading.present()
     this.produtos = this.db.list('produtos');
     this.produtos.subscribe(produto => {
-
       let newArr = []
       let types = {}
       let newItem
@@ -38,6 +40,7 @@ export class CatalogoPage {
         types[cur.categoria].data.push(cur);
       }
       this.categorias = newArr;
+      loading.dismiss()
       console.log('Categorias', this.categorias);
     });
   }
@@ -61,7 +64,9 @@ export class CatalogoPage {
 
   openProduct(prod) {
     console.log('prod', prod)
-    let modal = this.modalCtrl.create('ItemModalPage', { 'produto': prod });
+    let modal = this.modalCtrl.create('ItemModalPage', { 
+      'produto': prod 
+    });
     modal.onDidDismiss(data => {
       this.order = data;
       console.log('veio da modal', data);
