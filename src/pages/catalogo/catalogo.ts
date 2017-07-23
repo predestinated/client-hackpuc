@@ -28,6 +28,8 @@ export class CatalogoPage {
         }
       });
       this.conta.subscribe(conta => {
+        console.log("Contas: ", conta);
+        
         if (conta.length === 0) {
           this.conta.$ref.ref.update({ situacao: "aberta" })
         }
@@ -85,7 +87,7 @@ export class CatalogoPage {
   openOrder(){
     this.order.forEach(element => {
       element.entregue = false
-      this.conta.$ref.ref.child('produtos').push(element)
+      this.conta.$ref.ref.child('produtos').push({element})
     });
 
     this.alertCtrl.create({title:'Sucesso', subTitle: 'Pedido efetuado!'}).present()

@@ -37,6 +37,8 @@ export class ItemModalPage {
   }
 
   addQuantity(produto) {
+    console.log("Adicionou: ",produto);
+    
     this.order.push(produto)
     this.counter++
   }
