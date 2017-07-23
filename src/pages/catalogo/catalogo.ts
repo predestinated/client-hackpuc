@@ -2,21 +2,37 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, IonicPage, ModalController, LoadingController } from 'ionic-angular';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
-@IonicPage()
+@IonicPage({
+  name: 'CatalogoPage',
+  segment: 'catalogo/:conta'
+})
 @Component({
   selector: 'page-catalogo',
   templateUrl: 'catalogo.html'
 })
 
 export class CatalogoPage {
-  produtos: FirebaseListObservable<any[]>
-  showItens: boolean = false
   categorias: any[]
   order = []
+  showItens: boolean = false;
+  produtos: FirebaseListObservable<any[]>;
+  conta: FirebaseListObservable<any[]>;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public modalCtrl: ModalController, private db: AngularFireDatabase,
     private loadingCtrl: LoadingController) {
+    if (navParams.get('conta')) {
+      this.conta = this.db.list('contas/' + navParams.get('conta'), {
+        query: {
+          equalTo: navParams.get('conta')
+        }
+      });
+      this.conta.subscribe(conta => {
+        if (conta.length === 0) {
+          this.conta.$ref.ref.update({ situacao: "aberta", precoTotal: 10, produtos: [] })
+        }
+      })
+    }
 
   }
 
