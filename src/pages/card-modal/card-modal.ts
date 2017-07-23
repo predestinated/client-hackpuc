@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, Platform, ViewController, IonicPage } from 'ionic-angular';
+import { NavController, NavParams, Platform, ViewController, ModalController, IonicPage } from 'ionic-angular';
 
 /**
  * Generated class for the CardModalPage page.
@@ -20,9 +20,15 @@ export class CardModalPage {
   constructor(
     public platform: Platform,
     public params: NavParams,
-    public viewCtrl: ViewController
+    public viewCtrl: ViewController,
+    public modalCtrl: ModalController
   ) {
     this.cards = params.get('cards')
+  }
+
+  openModal() {
+    let modal = this.modalCtrl.create('AddCardModalPage');
+    modal.present();
   }
   dismiss() {
     this.viewCtrl.dismiss();
