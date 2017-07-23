@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, IonicPage, Platform, ViewController } from 'ionic-angular';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
 /**
  * Generated class for the ItemModalPage page.
@@ -13,8 +14,9 @@ import { NavController, NavParams, IonicPage, Platform, ViewController } from 'i
   selector: 'page-item-modal',
   templateUrl: 'item-modal.html',
 })
-export class ItemModalPage {
 
+export class ItemModalPage {
+  order = [];
   produto;
   valorTotal;
   counter = 1
@@ -23,7 +25,8 @@ export class ItemModalPage {
     public navCtrl: NavController,
     public platform: Platform,
     public viewCtrl: ViewController,
-    public navParams: NavParams
+    public navParams: NavParams,
+    private db: AngularFireDatabase
     ) {
     console.log(navParams.get('produto'))
     this.produto = navParams.get('produto')
@@ -31,7 +34,7 @@ export class ItemModalPage {
   }
 
   dismiss() {
-    this.viewCtrl.dismiss()
+    this.viewCtrl.dismiss(this.order)
   }
 
   addQuantity() {
@@ -45,6 +48,10 @@ export class ItemModalPage {
     else {
       return false;
     }
+  }
+
+  itemToOrder(produto) {
+    this.order.push(produto)
   }
 
 }

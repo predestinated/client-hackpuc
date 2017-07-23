@@ -12,6 +12,7 @@ export class CatalogoPage {
   produtos: FirebaseListObservable<any[]>
   showItens: boolean = false
   categorias: any[]
+  order = []
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public modalCtrl: ModalController, private db: AngularFireDatabase) {
@@ -61,6 +62,11 @@ export class CatalogoPage {
   openProduct(prod) {
     console.log('prod', prod)
     let modal = this.modalCtrl.create('ItemModalPage', { 'produto': prod });
+    modal.onDidDismiss(data => {
+      this.order = data;
+      console.log('veio da modal', data);
+      console.log('está no order', this.order);
+    });
     modal.present();
   }
 
