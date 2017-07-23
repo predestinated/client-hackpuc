@@ -40,7 +40,7 @@ export class PaymentProvider {
   pay (payment: SimplePayment) {
     return this.http
     .post(`${environment.payment.url}/pay`,payment)
-    .subscribe(data => console.log(data));
+  
   }
 
 
