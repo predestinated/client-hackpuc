@@ -46,7 +46,6 @@ export class CatalogoPage {
     this.produtos.subscribe(produto => {
       let newArr = []
       let types = {}
-      let newItem
       let cur
       let j
       for (let i = 0, j = produto.length; i < j; i++) {
@@ -84,7 +83,6 @@ export class CatalogoPage {
     modal.present();
   }
 
-<<<<<<< HEAD
   openOrder() {
     if (this.order.length == 0) {
       this.alertCtrl.create({ title: 'Opa...', subTitle: 'Você ainde não tem pedidos!' }).present()
@@ -96,13 +94,6 @@ export class CatalogoPage {
 
       this.alertCtrl.create({ title: 'Sucesso', subTitle: 'Pedido efetuado!' }).present()
     }
-=======
-  openOrder(){
-    this.order.forEach(element => {
-      element.entregue = false
-      this.conta.$ref.ref.child('produtos').push({element})
-    });
->>>>>>> f65a3b2146e4b619d9f964ee1d9070de11e10d78
 
   }
 
