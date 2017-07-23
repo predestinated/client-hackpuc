@@ -91,4 +91,5 @@
         <variable name="DEEPLINK_HOST" value="client-hackpuc.herokuapp.com" />
         <variable name="ANDROID_PATH_PREFIX" value="/" />
     </plugin>
+    <plugin name="phonegap-plugin-barcodescanner" spec="~6.0.8" />
 </widget>
