@@ -26,7 +26,7 @@ export class ContaPage {
     private afAuth: AngularFireAuth,
     private af: AngularFireDatabase,
     private payment: PaymentProvider,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
     ) {
   }
 
@@ -61,6 +61,8 @@ export class ContaPage {
   }
 
   pagarConta(){
+    let loading = this.loadingCtrl.create()
+    loading.present()
     let payment = {
       "MerchantOrderId":"2014111703",
       "Customer":{
@@ -81,7 +83,10 @@ export class ContaPage {
         }
       }
     }
-    this.payment.pay(payment)    
+    this.payment.pay(payment).subscribe(data => {
+      console.log(data)
+      loading.dismiss()
+      this.alertCtrl.create({ title: 'Sucesso', subTitle: 'Pagamento efetuado com sucesso!' }).present()  
+    })
   }
-
 }
