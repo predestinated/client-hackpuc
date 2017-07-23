@@ -84,25 +84,11 @@ export class CatalogoPage {
     modal.present();
   }
 
-<<<<<<< HEAD
-  openOrder() {
-    if (this.order.length == 0) {
-      this.alertCtrl.create({ title: 'Opa...', subTitle: 'Você ainde não tem pedidos!' }).present()
-    } else {
-      this.order.forEach(element => {
-        element.entregue = false
-        this.conta.$ref.ref.child('produtos').push(element)
-      });
-
-      this.alertCtrl.create({ title: 'Sucesso', subTitle: 'Pedido efetuado!' }).present()
-    }
-=======
   openOrder(){
     this.order.forEach(element => {
       element.entregue = false
       this.conta.$ref.ref.child('produtos').push({element})
     });
->>>>>>> f65a3b2146e4b619d9f964ee1d9070de11e10d78
 
   }
 
