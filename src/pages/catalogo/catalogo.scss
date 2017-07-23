@@ -1,5 +1,8 @@
 page-catalogo {
-
+  .bar-header {
+    background-color: color($colors, primary);
+    color: #fff;
+  }
 }
 .categoria {
     .products {
