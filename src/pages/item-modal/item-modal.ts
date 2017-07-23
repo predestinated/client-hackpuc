@@ -27,7 +27,6 @@ export class ItemModalPage {
     ) {
     console.log(navParams.get('produto'))
     this.produto = navParams.get('produto')
-    //console.log(this.produto)
   }
 
   dismiss() {

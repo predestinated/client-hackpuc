@@ -16,13 +16,13 @@ import { NavController, NavParams, Platform, ViewController, IonicPage } from 'i
 export class CardModalPage {
 
   character;
-
+  cards = []
   constructor(
     public platform: Platform,
     public params: NavParams,
     public viewCtrl: ViewController
   ) {
-    
+    this.cards = params.get('cards')
   }
   dismiss() {
     this.viewCtrl.dismiss();
