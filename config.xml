@@ -1,8 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="io.ionic.starter" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>MyApp</name>
-    <description>An awesome Ionic/Cordova app.</description>
-    <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
+    <name>Payper</name>
+    <description>Um aplicativo muito legal.</description>
+    <author email="allisonverdam@gmail.com.br" href="http://facebook.com/allison.verdam">Allison Verdam</author>
+    <author email="gabrielcastroslima@gmail.com.br" href="https://www.facebook.com/gabrielcslima">Gabriel Lima</author>
+    <author email="nicolaswbpereira@gmail.com.br" href="https://www.facebook.com/porrecobs">Nícolas Pereira</author>
+    <author email="lucasktrindade@gmail.com.br" href="https://www.facebook.com/lucas.trindade.71697">Lucas Trindade</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-navigation href="http://ionic.local/*" />

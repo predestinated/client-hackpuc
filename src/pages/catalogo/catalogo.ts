@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, IonicPage, ModalController, LoadingController, AlertController } from 'ionic-angular';
+import { NavController, NavParams, IonicPage, ModalController, LoadingController, AlertController, Platform } from 'ionic-angular';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
-import {ContaProvider} from '../../providers/conta/conta';
+import { ContaProvider } from '../../providers/conta/conta';
+
+declare var window;
 
 @IonicPage({
   name: 'CatalogoPage',
@@ -16,15 +18,16 @@ export class CatalogoPage {
   categorias: any[]
   order = []
   showItens: boolean = false;
-  produtos= [];
+  produtos = [];
   conta: FirebaseListObservable<any[]>;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public modalCtrl: ModalController, private db: AngularFireDatabase,
-    private loadingCtrl: LoadingController, private alertCtrl: AlertController, public contaProvider: ContaProvider) {
-      console.log("navParams.get('conta'):",navParams.get('conta'));
-      
-      let paramConta = navParams.get('conta')
+    private loadingCtrl: LoadingController, private alertCtrl: AlertController,
+    public contaProvider: ContaProvider, private platform: Platform) {
+    console.log("navParams.get('conta'):", navParams.get('conta'));
+
+    let paramConta = navParams.get('conta')
     if (paramConta === '1' || paramConta === '2') {
       this.conta = this.db.list('contas/' + navParams.get('conta'), {
         query: {
@@ -38,7 +41,9 @@ export class CatalogoPage {
       })
     } else {
       // redireciona pra view de scanning
-      this.navCtrl.setRoot('TelaScannerPage')
+      window.cordova
+        ? this.navCtrl.setRoot('TelaScannerPage')
+        : this.navCtrl.setRoot('CatalogoPage', { conta: 1 })
     }
 
   }
@@ -49,7 +54,7 @@ export class CatalogoPage {
 
     this.contaProvider.produtos.subscribe(produto => {
       console.log(produto);
-      
+
       this.produtos = produto
       let newArr = []
       let types = {}
@@ -96,7 +101,7 @@ export class CatalogoPage {
       this.order.forEach(element => {
         element.entregue = false;
       });
-       this.conta.$ref.ref.child('produtos').set(this.order)
+      this.conta.$ref.ref.child('produtos').set(this.order)
       this.alertCtrl.create({ title: 'Sucesso', subTitle: 'Pedido efetuado!' }).present()
     }
 
