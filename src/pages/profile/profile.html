@@ -15,25 +15,28 @@
 
 <ion-content>
     <div class="profile__photo">
-        <img [src]="user.avatar" alt="">
+        <img [src]="user?.avatar" alt="">
     </div>
     <ion-list>
         <ion-item>
             <ion-icon name="person" item-start color="primary"></ion-icon>
-            {{user.name}}
+            {{user?.name}}
         </ion-item>
         <ion-item>
             <ion-icon name="document" item-start color="primary"></ion-icon>
-            {{user.document}}
+            {{user?.document}}
         </ion-item>
         <ion-item>
             <ion-icon name="mail" item-start color="primary"></ion-icon>
-            {{user.email}}
+            {{user?.email}}
         </ion-item>
         <ion-item (click)="openModal()">
             <ion-icon name="card" item-start color="primary"></ion-icon>
             Cartões
             <ion-icon name="information-circle" item-end color="primary"></ion-icon>
         </ion-item>
+        <div padding>
+            <button ion-button full (click)="signOut()">Log Out</button>
+        </div>
     </ion-list>
 </ion-content>

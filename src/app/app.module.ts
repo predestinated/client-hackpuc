@@ -15,6 +15,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { ContaProvider } from '../providers/conta/conta';
 import { HttpModule } from "@angular/http";
 import { AuthenticationProvider } from '../providers/authentication/authentication';
+import { UserProvider } from '../providers/user/user';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { AuthenticationProvider } from '../providers/authentication/authenticati
     AngularFireModule,
     AngularFireAuthModule,
     AngularFireDatabaseModule,
-    AuthenticationProvider
+    AuthenticationProvider,
+    UserProvider
   ]
 })
 export class AppModule {}

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams,IonicPage, ModalController, ViewController, Platform } from 'ionic-angular';
+import {AuthenticationProvider} from '../../providers/authentication/authentication';
+import {UserProvider} from '../../providers/user/user';
 /**
  * Generated class for the ProfilePage page.
  *
@@ -13,14 +15,20 @@ import { NavController, NavParams,IonicPage, ModalController, ViewController, Pl
 })
 export class ProfilePage {
 
-  user = {
-    avatar:'https://www.gravatar.com/avatar/ad58db6a1c4941fd3c42c5fd656af7c1',
-    name: 'Lucas Trindade',
-    document: '154.453.907-05',
-    email: 'lucasktrindade@gmail.com'
-  }
+  user: {}
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, public auth: AuthenticationProvider, public uss: UserProvider) {
+    this.auth.user.subscribe(data => {
+      if(data === null) {
+        this.navCtrl.setRoot('SignInPage')
+      }else {
+        this.uss.filterByName(data.uid)
+      }
+    })
+    this.uss.users.subscribe(data => {      
+      this.user = data[0]
+    })
+
   }
 
   openModal() {
@@ -28,6 +36,10 @@ export class ProfilePage {
     modal.present();
   }
 
+  signOut() {
+    this.auth.logOut()    
+  }
+ 
 }
 
 
