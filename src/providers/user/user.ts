@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import {Subject} from 'rxjs/Subject';
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import md5 from 'js-md5'
 
 @Injectable()
 export class UserProvider {
 
   users: FirebaseListObservable<any[]>;
-  subject: any
+  subject: any;
+  user: FirebaseObjectObservable<any>;
 
   constructor(public http:Http, public db: AngularFireDatabase) {
     this.subject = new Subject()
@@ -20,7 +21,7 @@ export class UserProvider {
     });
   }
 
-  filterByName (value) {
+  filterByUID (value) {
     this.subject.next(value)
   }
 
