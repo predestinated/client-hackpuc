@@ -1,5 +1,5 @@
 import { ContaProvider } from './../../providers/conta/conta';
-import {PaymentProvider} from '../../providers/payment/payment';
+import { PaymentProvider } from '../../providers/payment/payment';
 import { Component } from '@angular/core';
 import { NavController, NavParams, IonicPage, LoadingController, AlertController } from 'ionic-angular';
 
@@ -14,7 +14,7 @@ import * as firebase from 'firebase/app';
   providers: [AngularFireAuth, AngularFireDatabase]
 })
 export class ContaPage {
-  contaFirebase: FirebaseObjectObservable<any>;
+  contaFirebase: any;
   usuario: any;
   conta;
   orders = [];
@@ -27,7 +27,7 @@ export class ContaPage {
     private af: AngularFireDatabase,
     private payment: PaymentProvider,
     private alertCtrl: AlertController,
-    ) {
+  ) {
   }
 
   ionViewDidLoad() {
@@ -35,16 +35,24 @@ export class ContaPage {
       this.usuario = usr;
       ///this.contaFirebase = this.af.object('/contas/ID')
     });
-    this.orders = JSON.parse(localStorage.getItem('order')) || []
-    this.getConta()
+    this.contaFirebase = firebase.database().ref('contas/' + localStorage.getItem('idConta'))
+    this.contaFirebase.child('produtos').on("value", el => {      
+      el.forEach(snapshot => {
+        this.produtos.push(snapshot.val())
+        this.total += snapshot.val().preco 
+      })
+    });
+
+    //this.orders = JSON.parse(localStorage.getItem('order')) || []
+    //this.getConta()
   }
 
-  ionViewWillEnter () {
-    this.orders = JSON.parse(localStorage.getItem('order')) || []
+  ionViewWillEnter() {
+    //this.orders = JSON.parse(localStorage.getItem('order')) || []
   }
 
   getConta() {
-    
+
     // let loading = this.loadingCtrl.create();
     // loading.present();
     // this.contaProvider.getConta().subscribe(conta => {
@@ -52,41 +60,44 @@ export class ContaPage {
     //   loading.dismiss();
     // })
 
-    if (this.orders.length > 0) {
-      this.orders.forEach(element => {
-        this.produtos.push(element)
-        this.total += element.preco 
-      });
-    }
+    // if (this.orders.length > 0) {
+    //   this.orders.forEach(element => {
+    //     this.produtos.push(element)
+    //     this.total += element.preco 
+    //   });
+    // }
   }
 
-  pagarConta(){
+  pagarConta() {
     let loading = this.loadingCtrl.create()
     loading.present()
     let payment = {
-      "MerchantOrderId":"2014111703",
-      "Customer":{
-          "Name":"Comprador crédito simples"
+      "MerchantOrderId": "2014111703",
+      "Customer": {
+        "Name": "Comprador crédito simples"
       },
-      "Payment":{
-        "Type":"CreditCard",
-        "Amount":100000,
-        "Installments":1,
-        "SoftDescriptor":"123456789ABCD",
-        "CreditCard":{
-            "CardNumber":"0000.0000.0000.0001",
-            "Holder":"Teste Holder",
-            "ExpirationDate":"12/2030",
-            "SecurityCode":"123",
-            "SaveCard":"true",
-            "Brand":"Visa"
+      "Payment": {
+        "Type": "CreditCard",
+        "Amount": 100000,
+        "Installments": 1,
+        "SoftDescriptor": "123456789ABCD",
+        "CreditCard": {
+          "CardNumber": "0000.0000.0000.0001",
+          "Holder": "Teste Holder",
+          "ExpirationDate": "12/2030",
+          "SecurityCode": "123",
+          "SaveCard": "true",
+          "Brand": "Visa"
         }
       }
     }
     this.payment.pay(payment).subscribe(data => {
+      this.contaFirebase.child('produtos').remove();
+      this.produtos = [];
+      this.total = 0;
       console.log(data)
       loading.dismiss()
-      this.alertCtrl.create({ title: 'Sucesso', subTitle: 'Pagamento efetuado com sucesso!' }).present()  
+      this.alertCtrl.create({ title: 'Sucesso', subTitle: 'Pagamento efetuado com sucesso!' }).present()
     })
   }
 }

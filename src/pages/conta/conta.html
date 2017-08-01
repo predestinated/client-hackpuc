@@ -13,11 +13,11 @@
         <ion-title text-center>Conta</ion-title>
     </ion-navbar>
 
-    <ion-item text-center *ngIf="orders.length == 0" class="">
+    <ion-item text-center *ngIf="!produtos" class="">
         Você ainda não tem pedidos.
     </ion-item>
 
-    <ion-list *ngIf="orders.length > 0">
+    <ion-list *ngIf="produtos">
         <ion-row *ngFor="let produto of produtos">
             <ion-item>
                 <ion-col col-8 class="pedido"> {{produto.nome}}
@@ -29,7 +29,7 @@
         </ion-row>
     </ion-list>
 
-    <ion-footer *ngIf="orders.length > 0">
+    <ion-footer *ngIf="produtos">
         <ion-item>
             <ion-row>
                 <ion-col col-6></ion-col>

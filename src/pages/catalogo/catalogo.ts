@@ -34,6 +34,8 @@ export class CatalogoPage {
           equalTo: navParams.get('conta')
         }
       });
+      //salvando id da conta
+      localStorage.setItem("idConta", navParams.get('conta'));
       this.conta.subscribe(conta => {
         if (conta.length === 0) {
           this.conta.$ref.ref.update({ situacao: "aberta" })
@@ -94,14 +96,16 @@ export class CatalogoPage {
   }
 
   openOrder() {
+    console.log("Order:",this.order)
     this.contaProvider.insertIntoConta(this.order)
     if (this.order.length == 0) {
       this.alertCtrl.create({ title: 'Opa...', subTitle: 'Você ainde não tem pedidos!' }).present()
     } else {
       this.order.forEach(element => {
         element.entregue = false;
+        this.conta.$ref.ref.child('produtos').push(element)
       });
-      this.conta.$ref.ref.child('produtos').set(this.order)
+      this.order = [];
       this.alertCtrl.create({ title: 'Sucesso', subTitle: 'Pedido efetuado!' }).present()
     }
 
