@@ -7,7 +7,6 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
-import { AboutPage } from '../pages/about/about';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -21,7 +20,6 @@ import { PaymentProvider } from '../providers/payment/payment';
 @NgModule({
   declarations: [
     MyApp,
-    AboutPage,
     HomePage,
     TabsPage
   ],

@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { SignUpPage } from '../sign-up/sign-up'
 import { NavController, NavParams, IonicPage } from 'ionic-angular';
 import { AuthenticationProvider } from '../../providers/authentication/authentication'
 
